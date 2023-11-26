@@ -2,8 +2,10 @@
 
 #include <vector>
 #include <memory>
-#include "material.hpp"
+#include "../material.hpp"
 #include "../node.hpp"
+
+#include <Eigen\Sparse>
 
 namespace  FiniteElement
 {
@@ -26,18 +28,18 @@ namespace  FiniteElement
 
         std::vector<size_t> GetElementNodeIndex();
         
-        virtual std::vector<double> ShapeFunction(double ParametricPostition) = 0;              // shape function
-        virtual std::vector<double> ShapeFunctionDerivative(double ParametricPostition) = 0;    // shape function
-        virtual  void AttibuteMaterial( FiniteElement::Material::Material* mat_);
+        virtual Eigen::Array2d ShapeFunction(double ParametricPostition) = 0;              // shape function
+        virtual Eigen::Array2d ShapeFunctionDerivative(double ParametricPostition) = 0;    // shape function
+        virtual  void AttibuteMaterial( FiniteElement::Material::Material &mat_);
 
     };
 }
 
 FiniteElement::BaseElement::BaseElement(std::vector<node> &nodeV, std::vector<size_t> IndexNodes = {}) : nodeVector(&nodeV), index(IndexNodes) {};
 
-void FiniteElement::BaseElement::AttibuteMaterial( FiniteElement::Material::Material* mat_)
+void FiniteElement::BaseElement::AttibuteMaterial( FiniteElement::Material::Material &mat_)
 {
-    m_material = mat_;
+    m_material = &mat_;
 };
 
 std::vector<size_t> FiniteElement::BaseElement::GetElementNodeIndex()
