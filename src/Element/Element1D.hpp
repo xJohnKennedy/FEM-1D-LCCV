@@ -18,8 +18,8 @@ namespace  FiniteElement
             ~OneDimensionalElement() = default;
             OneDimensionalElement(std::vector<node> &nodeV, std::vector<size_t> IndexNodes);
             double GetLenght();
-            std::vector<double> ShapeFunction(double ParametricPostition);
-            std::vector<double> ShapeFunctionDerivative(double ParametricPostition);
+            Eigen::Array2d ShapeFunction(double ParametricPostition);
+            Eigen::Array2d ShapeFunctionDerivative(double ParametricPostition);
 
         };
         
@@ -32,16 +32,16 @@ namespace  FiniteElement
             return a1.GetPosition() - a0.GetPosition() ;
         };
 
-        std::vector<double> OneDimensionalElement::ShapeFunction(double ParametricPostition = 0)
+        Eigen::Array2d OneDimensionalElement::ShapeFunction(double ParametricPostition = 0)
         {
             double l = GetLenght();
-            return std::vector<double> { 1 - (ParametricPostition + 1) / 2 / l, (ParametricPostition + 1) / 2 / l};
+            return Eigen::Array2d { (1 - (ParametricPostition + 1) / 2) , ((ParametricPostition + 1) / 2) };
         };
 
-        std::vector<double> OneDimensionalElement::ShapeFunctionDerivative(double ParametricPostition = 0)
+        Eigen::Array2d OneDimensionalElement::ShapeFunctionDerivative(double ParametricPostition = 0)
         {
             double l = GetLenght();
-            return std::vector<double> { -1.0f / l, 1.0f /  l};
+            return Eigen::Array2d { -1.0f / l, 1.0f /  l};
         };
     
 };
