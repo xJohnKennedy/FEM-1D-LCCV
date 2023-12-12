@@ -2,7 +2,7 @@
 
 #include <vector>
 #include <memory>
-#include "material.hpp"
+#include "../material.hpp"
 #include "../node.hpp"
 
 namespace  FiniteElement
