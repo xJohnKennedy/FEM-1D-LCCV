@@ -9,3 +9,7 @@
 /FEM 1D/x64/**
 **.exe
 **.pdb
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user

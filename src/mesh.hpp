@@ -1,5 +1,5 @@
 #include "node.hpp"
-#include "Element\element.hpp"
+#include "Element/element.hpp"
 #include "load.hpp"
 #include <memory>
 
@@ -102,8 +102,10 @@ namespace FiniteElement
             std::cout << "Load Matrix - Before Assemble " << std::endl;
             std::cout << m_LoadMatrix << std::endl;
 
+            //TODO: create a method to assemble matrices
             for(size_t i=0; i < m_numElements; i++)
             {
+                //TODO: after swapping pointers by references, adequate to call operator directly
                 m_elements->operator[](i).AssembleMassMatrix();
                 m_elements->operator[](i).AssembleStiffnessMatrix();
 
@@ -111,6 +113,7 @@ namespace FiniteElement
                 auto tempStiff = m_elements->operator[](i).GetStiffnessMatrix();
                 IndexNodes = m_elements->operator[](i).GetElementNodeIndex();
                 
+                //TODO: rename sizeVector to numberNodesPerElement
                 auto sizeVector = IndexNodes.size();
 
                 for (size_t j = 0; j < sizeVector; j++)
@@ -163,6 +166,7 @@ namespace FiniteElement
             //code to permutation matrix
             //fist we need a indices of boundary nodes conditions
 
+            //TODO: create a method to create permutation matrix
             Eigen::SparseMatrix<double> permColumn(dim, dim);
             Eigen::SparseMatrix<double> permRow(dim, dim);
 
@@ -226,7 +230,7 @@ namespace FiniteElement
             std::cout << "Load Matrix - After Reduced " << std::endl;
             std::cout << m_LoadMatrixReduced << std::endl;
 
-
+            //TODO: create a method to solve linear system
             Eigen::SimplicialLDLT<Eigen::SparseMatrix<double>> solver;
             solver.analyzePattern(m_StiffMatrixReduced.block(0,0, dim - maxBCNodes, dim - maxBCNodes));
             solver.factorize(m_StiffMatrixReduced.block(0, 0, dim - maxBCNodes, dim - maxBCNodes));
