@@ -24,9 +24,11 @@ namespace  FiniteElement
     public:
         BaseElement() = default;
         ~BaseElement() = default;
-        BaseElement(std::vector<node> &nodeV, std::vector<size_t> IndexNodes);
+        BaseElement(std::vector<size_t> IndexNodes);
 
         std::vector<size_t> GetElementNodeIndex();
+
+        void SetNodeVector(std::vector<node>* nVector);
         
         virtual Eigen::Array2d ShapeFunction(double ParametricPostition) = 0;              // shape function
         virtual Eigen::Array2d ShapeFunctionDerivative(double ParametricPostition) = 0;    // shape function
@@ -35,7 +37,7 @@ namespace  FiniteElement
     };
 }
 
-FiniteElement::BaseElement::BaseElement(std::vector<node> &nodeV, std::vector<size_t> IndexNodes = {}) : nodeVector(&nodeV), index(IndexNodes) {};
+FiniteElement::BaseElement::BaseElement(std::vector<size_t> IndexNodes = {}) : index(IndexNodes) {};
 
 void FiniteElement::BaseElement::AttibuteMaterial( FiniteElement::Material::Material &mat_)
 {
@@ -45,4 +47,9 @@ void FiniteElement::BaseElement::AttibuteMaterial( FiniteElement::Material::Mate
 std::vector<size_t> FiniteElement::BaseElement::GetElementNodeIndex()
 {
     return index; 
-};
+}
+inline void FiniteElement::BaseElement::SetNodeVector(std::vector<node>*nVector)
+{
+    nodeVector = nVector;
+}
+;
