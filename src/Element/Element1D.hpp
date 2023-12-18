@@ -16,14 +16,14 @@ namespace  FiniteElement
         public:
             OneDimensionalElement() = default;
             ~OneDimensionalElement() = default;
-            OneDimensionalElement(std::vector<node> &nodeV, std::vector<size_t> IndexNodes);
+            OneDimensionalElement(std::vector<size_t> IndexNodes);
             double GetLenght();
             Eigen::Array2d ShapeFunction(double ParametricPostition);
             Eigen::Array2d ShapeFunctionDerivative(double ParametricPostition);
 
         };
         
-        OneDimensionalElement::OneDimensionalElement(std::vector<node> &nodeV, std::vector<size_t> IndexNodes) : BaseElement(nodeV,IndexNodes){};
+        OneDimensionalElement::OneDimensionalElement(std::vector<size_t> IndexNodes) : BaseElement(IndexNodes){};
 
         double OneDimensionalElement::GetLenght()
         {

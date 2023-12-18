@@ -36,6 +36,7 @@ namespace FiniteElement {
 
         auto GetNode();
         auto GetBCType();
+        auto GetBCValue();
     };
 
     boundary_node::boundary_node (const size_t &NumNode, const bcType &bcType, const double &BCValue) : m_NumNode(NumNode), m_bcType(bcType),
@@ -49,6 +50,11 @@ namespace FiniteElement {
     auto boundary_node::GetBCType()
     {
         return m_bcType;
+    }
+
+    auto boundary_node::GetBCValue()
+    {
+        return m_BCValue;
     }
 
 };

@@ -17,7 +17,7 @@ namespace  FiniteElement
         Eigen::MatrixXd m_LoadMatrix;
     public:
         Truss() = default;
-        Truss(std::vector<node> &nodeV, std::vector<size_t> IndexNodes, double area_);
+        Truss(std::vector<size_t> IndexNodes, double area_);
         ~Truss() = default;
 
 
@@ -34,8 +34,8 @@ namespace  FiniteElement
 };
 
 
-FiniteElement::Truss::Truss(std::vector<node> &nodeV, std::vector<size_t> IndexNodes, double area_): 
-        FiniteElement::OneDimensionalElement(nodeV, IndexNodes),
+FiniteElement::Truss::Truss(std::vector<size_t> IndexNodes, double area_): 
+        FiniteElement::OneDimensionalElement(IndexNodes),
         m_area(area_){};
 
 double FiniteElement::Truss::GetArea(double ParametricPostition = 0)
